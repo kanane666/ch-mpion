@@ -9,14 +9,6 @@ import { FinalPhaseScreen } from "@/components/FinalPhaseScreen";
 import { ResultsScreen } from "@/components/ResultsScreen";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "CHAMPION 🏆 — Gestion de Tournois" },
-      { name: "description", content: "Application de gestion de tournois avec modes Knockout, Championnat et Coupe avec poules." },
-      { property: "og:title", content: "CHAMPION 🏆 — Gestion de Tournois" },
-      { property: "og:description", content: "Créez et gérez vos tournois facilement." },
-    ],
-  }),
   component: Index,
 });
 

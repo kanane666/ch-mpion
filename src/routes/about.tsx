@@ -1,14 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/about')({
-  head: () => ({
-    meta: [
-      { title: 'À Propos — CHAMPION 🏆' },
-      { name: 'description', content: 'Application de gestion de tournois créée par Ababacar Dieng.' },
-      { property: 'og:title', content: 'À Propos — CHAMPION 🏆' },
-      { property: 'og:description', content: 'Application de gestion de tournois créée par Ababacar Dieng.' },
-    ],
-  }),
   component: AboutPage,
 });
 
