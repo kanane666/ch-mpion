@@ -15,7 +15,7 @@ export function ResultsScreen() {
     canvas.height = window.innerHeight;
 
     const particles: { x: number; y: number; vx: number; vy: number; color: string; size: number; rotation: number; rotSpeed: number }[] = [];
-    const colors = ['#FFD700', '#2563EB', '#FF6B6B', '#4ADE80', '#A78BFA', '#FB923C'];
+    const colors = ['#FFD700', '#2563EB', '#FF6B6B', '#4ADE80', '#A78BFA', '#7C3AED', '#FB923C'];
 
     for (let i = 0; i < 150; i++) {
       particles.push({
@@ -60,9 +60,9 @@ export function ResultsScreen() {
   }, []);
 
   const podium = [
-    { place: '🥇', label: '1er', player: state.champion, colorClass: 'text-gold', bgClass: 'bg-gold/10 border-gold/30' },
-    { place: '🥈', label: '2ème', player: state.secondPlace, colorClass: 'text-silver', bgClass: 'bg-silver/10 border-silver/30' },
-    { place: '🥉', label: '3ème', player: state.thirdPlace, colorClass: 'text-bronze', bgClass: 'bg-bronze/10 border-bronze/30' },
+    { place: '🥇', label: '1er', player: state.champion, gradient: 'from-gold/20 to-transparent', borderColor: 'border-gold/40', textColor: 'text-gold' },
+    { place: '🥈', label: '2ème', player: state.secondPlace, gradient: 'from-silver/15 to-transparent', borderColor: 'border-silver/30', textColor: 'text-silver' },
+    { place: '🥉', label: '3ème', player: state.thirdPlace, gradient: 'from-bronze/15 to-transparent', borderColor: 'border-bronze/30', textColor: 'text-bronze' },
   ];
 
   function handleShare() {
@@ -77,7 +77,7 @@ export function ResultsScreen() {
 
       <div className="relative z-20 text-center max-w-xl w-full">
         <div className="animate-trophy-bounce text-7xl mb-4">🏆</div>
-        <h1 className="text-4xl md:text-5xl font-bold font-heading text-foreground mb-2 animate-fade-up">
+        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-2 animate-fade-up text-gradient">
           CHAMPION
         </h1>
         <p className="text-muted-foreground mb-10 animate-fade-up" style={{ animationDelay: '0.1s' }}>
@@ -89,13 +89,13 @@ export function ResultsScreen() {
             p.player && (
               <div
                 key={i}
-                className={`glass-card p-5 border ${p.bgClass} animate-fade-up flex items-center gap-4`}
+                className={`glass-card p-5 border ${p.borderColor} bg-gradient-to-r ${p.gradient} animate-fade-up flex items-center gap-4`}
                 style={{ animationDelay: `${0.2 + i * 0.15}s` }}
               >
                 <span className="text-4xl">{p.place}</span>
                 <div className="text-left">
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{p.label}</div>
-                  <div className={`text-xl font-bold font-heading ${p.colorClass}`}>{p.player}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-widest">{p.label}</div>
+                  <div className={`text-xl font-bold font-heading ${p.textColor}`}>{p.player}</div>
                 </div>
               </div>
             )
@@ -111,8 +111,7 @@ export function ResultsScreen() {
           </button>
           <button
             onClick={handleShare}
-            className="btn-champion bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            style={{ background: 'var(--secondary)' }}
+            className="bg-secondary/60 hover:bg-secondary/80 text-secondary-foreground font-heading font-bold uppercase tracking-wider rounded-lg px-6 py-3 transition-all duration-300 border border-glass-border hover:border-glass-hover"
           >
             Partager
           </button>

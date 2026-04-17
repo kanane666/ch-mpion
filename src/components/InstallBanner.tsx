@@ -39,7 +39,7 @@ export function InstallBanner() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-scale-up">
-      <div className="glass-card flex items-center gap-3 p-4">
+      <div className="glass-card flex items-center gap-3 p-4 border border-glass-border shadow-[0_8px_32px_oklch(0_0_0/30%)]">
         <span className="text-2xl">📲</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold text-foreground">Installer CHAMPION sur votre téléphone ?</p>
@@ -52,7 +52,7 @@ export function InstallBanner() {
         </button>
         <button
           onClick={handleDismiss}
-          className="text-muted-foreground hover:text-foreground text-lg leading-none"
+          className="text-muted-foreground hover:text-foreground text-lg leading-none transition-colors"
           aria-label="Fermer"
         >
           ✕

@@ -8,9 +8,9 @@ function AboutPage() {
   return (
     <div className="min-h-screen bg-radial-gradient flex items-center justify-center p-4 md:p-8">
       <div className="glass-card p-8 md:p-10 w-full max-w-lg animate-scale-up text-center">
-        <div className="text-5xl mb-4">🏆</div>
+        <div className="text-5xl mb-4 animate-float">🏆</div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground font-heading tracking-tight mb-2">
+        <h1 className="text-3xl md:text-4xl font-bold font-heading tracking-tight mb-2 text-gradient">
           CHAMPION
         </h1>
 
@@ -35,13 +35,13 @@ function AboutPage() {
           </p>
         </div>
 
-        <div className="border-t border-border pt-6 mb-6">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest mb-3">Développée avec passion par</p>
+        <div className="border-t border-glass-border pt-6 mb-6">
+          <p className="text-xs text-muted-foreground uppercase tracking-[0.2em] mb-3">Développée avec passion par</p>
           <p className="text-lg font-bold text-foreground font-heading">Ababacar Dieng</p>
           <p className="text-sm text-muted-foreground">Ingénieur en Génie Logiciel</p>
           <a
             href="mailto:diengbabacar666@gmail.com"
-            className="inline-block mt-2 text-sm text-primary hover:underline"
+            className="inline-block mt-2 text-sm text-primary hover:underline transition-colors"
           >
             📧 diengbabacar666@gmail.com
           </a>

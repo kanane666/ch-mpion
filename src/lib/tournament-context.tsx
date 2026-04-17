@@ -57,14 +57,12 @@ function tournamentReducer(state: TournamentState, action: TournamentAction): To
       if (state.format === 'coupe') {
         // Generate groups with matches
         let groups = state.groups.length > 0 ? state.groups : distributePlayersIntoGroups(state.players, state.numGroups);
-        // Activate first match of first group
-        groups = groups.map((g, gi) => {
-          if (gi === 0 && g.matches.length > 0) {
-            const ms = [...g.matches];
-            ms[0] = { ...ms[0], status: 'active' };
-            return { ...g, matches: ms };
-          }
-          return g;
+        // Activate first match of EVERY group (each group runs independently)
+        groups = groups.map((g) => {
+          if (g.matches.length === 0) return g;
+          const ms = [...g.matches];
+          ms[0] = { ...ms[0], status: 'active' };
+          return { ...g, matches: ms };
         });
         return { ...state, groups, phase: 'group_stage' };
       }
