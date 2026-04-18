@@ -27,7 +27,6 @@ type Step = 1 | 2 | 3;
 export function SetupScreen() {
   const { state, dispatch } = useTournament();
   const [playerName, setPlayerName] = useState('');
-  const [autoCount, setAutoCount] = useState(8);
   const [showCoupeModal, setShowCoupeModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<Step>(1);
 
@@ -45,9 +44,14 @@ export function SetupScreen() {
     dispatch({ type: 'SET_PLAYERS', players: players.filter(p => p !== name) });
   }
 
-  function autoGenerate() {
-    const generated = Array.from({ length: autoCount }, (_, i) => `Joueur ${i + 1}`);
+  function autoGenerate(count: number) {
+    const generated = Array.from({ length: count }, (_, i) => `Joueur ${i + 1}`);
     dispatch({ type: 'SET_PLAYERS', players: generated });
+  }
+
+  const PRESETS = [4, 8, 12, 16];
+  function isActivePreset(n: number) {
+    return players.length === n && players.every((p, i) => p === `Joueur ${i + 1}`);
   }
 
   const suggestedGroups = players.length >= 4 ? Math.max(2, Math.min(Math.floor(players.length / 3), 8)) : 2;
@@ -239,20 +243,32 @@ export function SetupScreen() {
               </button>
             </div>
 
-            {/* Auto generate */}
-            <div className="flex items-center gap-3 mb-5 p-3 bg-secondary/20 rounded-xl border border-glass-border">
-              <span className="text-sm text-muted-foreground">Générer auto.</span>
-              <input
-                type="number"
-                min={4}
-                max={999}
-                value={autoCount}
-                onChange={e => setAutoCount(Math.max(4, parseInt(e.target.value) || 4))}
-                className="w-16 bg-secondary/40 border border-glass-border rounded-lg px-2 py-1.5 text-foreground text-sm text-center focus:outline-none focus:ring-2 focus:ring-primary/40"
-              />
-              <button onClick={autoGenerate} className="text-sm text-primary hover:text-primary/80 hover:underline transition-colors font-medium">
-                joueurs
-              </button>
+            {/* Quick generation */}
+            <div className="mb-5 p-4 bg-secondary/20 rounded-xl border border-glass-border">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                ⚡ Génération rapide
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {PRESETS.map(n => {
+                  const active = isActivePreset(n);
+                  return (
+                    <button
+                      key={n}
+                      onClick={() => autoGenerate(n)}
+                      className={`rounded-full px-4 py-2 text-sm font-bold transition-all duration-200 ${
+                        active
+                          ? 'bg-gradient-to-r from-primary to-purple-glow text-primary-foreground shadow-[0_0_15px_oklch(0.5_0.2_270/40%)] scale-105'
+                          : 'border border-glass-border bg-transparent text-foreground hover:bg-secondary/40 hover:border-primary/40 hover:scale-[1.03]'
+                      }`}
+                    >
+                      {n} joueurs
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">
+                Génère des joueurs automatiquement — modifiables après
+              </p>
             </div>
 
             {/* Counter */}
